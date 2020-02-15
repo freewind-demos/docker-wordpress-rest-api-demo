@@ -1,7 +1,7 @@
 <?php
 
-
-add_action('rest_api_init', function () {
+function routes()
+{
     register_rest_route('api/v1', '/hello/', array(
         'methods' => 'GET',
         'callback' => function ($request) {
@@ -23,4 +23,6 @@ add_action('rest_api_init', function () {
             return rest_ensure_response($response);
         },
     ));
-});
+}
+
+add_action('rest_api_init', routes);
