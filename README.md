@@ -18,6 +18,8 @@ Settings -> Permalink -> Post name
 本demo演示了如何自定义一个rest api，位于WordPress-5.3.2/my-rest.php，
 需要把它require进系统（比如在wp-config.php中）
 
+注意：`$request->get_param`可以同时从queryString和body中取param，body中会覆盖queryString中。
+
 ```
 npm run up
 ```
@@ -31,7 +33,7 @@ freewind
 
 - http://localhost:20080/?rest_route=/wp/v2/posts
 - http://localhost:20080/wp-json/v2/posts
-- http://localhost:20080/wp-json/hello-world/v1/hello?name=world
+- http://localhost:20080/wp-json/api/v1/hello?name=world
 
 更多可用：https://developer.wordpress.org/rest-api/reference/
 

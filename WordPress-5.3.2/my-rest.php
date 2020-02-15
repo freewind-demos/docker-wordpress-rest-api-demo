@@ -1,20 +1,26 @@
 <?php
 
-function prefix_get_endpoint_phrase($request)
-{
-    $name = $request->get_param( 'name' );
-    $response = array(
-        "hello" => $name
-    );
-    return rest_ensure_response($response);
-}
 
-function prefix_register_example_routes()
-{
-    register_rest_route('hello-world/v1', '/hello/', array(
+add_action('rest_api_init', function () {
+    register_rest_route('api/v1', '/hello/', array(
         'methods' => 'GET',
-        'callback' => 'prefix_get_endpoint_phrase',
+        'callback' => function ($request) {
+            $name = $request->get_param('name');
+            $response = array(
+                "GET-hello" => $name
+            );
+            return rest_ensure_response($response);
+        },
     ));
-}
 
-add_action('rest_api_init', 'prefix_register_example_routes');
+    register_rest_route('api/v1', '/hello/', array(
+        'methods' => 'PUT',
+        'callback' => function ($request) {
+            $name = $request->get_param('name');
+            $response = array(
+                "PUT-hello" => $name
+            );
+            return rest_ensure_response($response);
+        },
+    ));
+});
